@@ -107,5 +107,9 @@ def transfer_funds():
     return jsonify({"error": "Transfer succeeded. "}), 200
 
 
+@app.route("/qqq", methods=["POST"])
+def qqq():
+    return {"FUCK YOU"}
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

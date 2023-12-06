@@ -6,31 +6,17 @@ spec:
   rules:
   - http:
       paths:
-      - path: /user
+      - path: /transfer-funds
         pathType: Prefix
         backend:
           service:
-            name: users-service
+            name: banking-service
             port:
               number: 80
-      - path: /users
+      - path: /qqq
         pathType: Prefix
         backend:
           service:
-            name: users-service
-            port:
-              number: 80
-      - path: /load
-        pathType: Prefix
-        backend:
-          service:
-            name: users-service
-            port:
-              number: 80
-      - path: /geo
-        pathType: Prefix
-        backend:
-          service:
-            name: geo-service
+            name: banking-service
             port:
               number: 80

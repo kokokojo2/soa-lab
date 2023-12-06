@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banking
+  template:
+    metadata:
+      labels:
+        app: banking
+    spec:
+      containers:
+      - name: banking-container
+        image: banking_service:1
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: banking-service
+spec:
+  type: ClusterIP
+  selector:
+    app: banking
+  ports:
+    - port: 80
