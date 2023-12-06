@@ -1,0 +1,10 @@
+{
+    "development": {
+      "username": "root",
+      "password": "ilya20122018",
+      "database": "transactions_service",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+  }
+  

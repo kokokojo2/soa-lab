@@ -1,0 +1,6 @@
+users_service/venv/
+users_service/.idea/
+banking_service/venv/
+banking_service/.idea/
+transactions_service/.idea/
+transactions_service/node_modules/
