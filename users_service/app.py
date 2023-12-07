@@ -2,11 +2,12 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import inspect
 import requests
+import hashlib
 
 app = Flask(__name__)
 app.config[
     "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://postgres:ilya20122018@localhost/user_service"
+] = "postgresql://postgres:qwerty123@postgres-service/users"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -90,28 +91,6 @@ def get_user(user_id):
     return jsonify(user_data), 200
 
 
-@app.route("/users/<int:user_id>/transactions", methods=["GET"])
-def get_user_transactions(user_id):
-    # URL ендпоінту сервісу transactions
-    transactions_service_url = "http://localhost:3000/transactions/user/" + str(user_id)
-
-    try:
-        # Виконання GET-запиту до сервісу transactions для отримання транзакцій конкретного користувача
-        response = requests.get(transactions_service_url)
-
-        # Перевірка статусу відповіді
-        if response.status_code == 200:
-            transactions = response.json()
-            return jsonify(transactions)
-        else:
-            return (
-                jsonify({"message": "Помилка отримання транзакцій"}),
-                response.status_code,
-            )
-    except requests.RequestException as e:
-        return jsonify({"message": "Помилка з'єднання з сервісом транзакцій"}), 500
-
-
 @app.route("/users/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
     user = User.query.get(user_id)
@@ -159,6 +138,11 @@ def update_user_balance(user_id):
     db.session.commit()
     return jsonify({"message": "Balance was updated successfully."}), 200
 
+@app.route("/users/test-scaling", methods=["POST"])
+def simulate_load():
+    for _ in range(100000000):
+        hashlib.sha256(b"test").hexdigest()
+    return jsonify({"detail": "Performed 100000000 iters of sha256 hashing."}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port=80)
