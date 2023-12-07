@@ -13,10 +13,18 @@ spec:
             name: banking-service
             port:
               number: 80
-      - path: /qqq
+      - path: /users
         pathType: Prefix
         backend:
           service:
-            name: banking-service
+            name: users-service
             port:
               number: 80
+      - path: /transactions
+        pathType: Prefix
+        backend:
+          service:
+            name: transactions-service
+            port:
+              number: 80
+

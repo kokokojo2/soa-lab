@@ -6,8 +6,8 @@ from dataclasses import dataclass
 
 app = Flask(__name__)
 
-app.config["USERS_SERVICE_BASE_URL"] = "http://127.0.0.1:5000"
-app.config["TRANSACTIONS_SERVICE_BASE_URL"] = "http://127.0.0.1:3000"
+app.config["USERS_SERVICE_BASE_URL"] = "http://users-service:80"
+app.config["TRANSACTIONS_SERVICE_BASE_URL"] = "http://transactions-service:80"
 
 
 @dataclass
@@ -106,10 +106,6 @@ def transfer_funds():
 
     return jsonify({"error": "Transfer succeeded. "}), 200
 
-
-@app.route("/qqq", methods=["POST"])
-def qqq():
-    return {"FUCK YOU"}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=80)

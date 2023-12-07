@@ -15,7 +15,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 const Transaction = models.Transaction;
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 sequelize.authenticate()
     .then(() => {

@@ -1,9 +1,9 @@
 {
     "development": {
       "username": "root",
-      "password": "ilya20122018",
+      "password": "loveiasa222",
       "database": "transactions_service",
-      "host": "localhost",
+      "host": "mysql-service",
       "dialect": "mysql"
     }
   }
